@@ -1,30 +1,50 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import PokemonList from './components/PokemonList';
+import PokemonInfoCard from './components/PokemonInfoCard';
 import Pagination from './components/Pagination';
 
+import Footer from './components/Footer'
+import pokeball from './images/pokeball.png'
+
+//
+// TODO ADD DOCUMENTATION AND THOUGHTS
+//
+
+
 function App() {
-  const [pokemon, setPokemon] = useState([])
-  const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon")
+  const [allPokemons, setAllPokemons] = useState([]);
+  const [currentPageUrl, setCurrentPageUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon?limit=20"
+  );
   const [nextPageUrl, setNextPageUrl] = useState()
   const [prevPageUrl, setPrevPageUrl] = useState()
   const [loading, setLoading] = useState(true)
 
+  const getAllPokemons = async () => {
+    const respond = await fetch(currentPageUrl);
+    const data = await respond.json();
+    setCurrentPageUrl(data.next);
+    setNextPageUrl(data.next);
+    setPrevPageUrl(data.previous);
 
-useEffect(() => {
-  setLoading(true)
-  let cancel
-  axios.get(currentPageUrl, {
-    cancelToken: new axios.CancelToken(c => cancel = c)
-  }).then(res => {
+    function createPokemonObject(result) {
+    result.forEach(async (pokemon) => {
+      const respond = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+      );
+      const data = await respond.json();
+      setAllPokemons((currentList) => [...currentList, data]);
+    });
+    }
+    createPokemonObject(data.results);
+    await console.log(allPokemons);
+  };
+  useEffect(() => {
+    //add loading indicator
+    setLoading(true)
+    getAllPokemons();
+    //remove after loading
     setLoading(false)
-    setNextPageUrl(res.data.next)
-    setPrevPageUrl(res.data.previous)
-    setPokemon(res.data.results.map(p => p.name))
-  })
-
-  return () => cancel()
-},[currentPageUrl])
+  }, []);
 
   function gotoNextPage() {
     setCurrentPageUrl(nextPageUrl.replace("limit=14", "limit=20"))
@@ -38,11 +58,25 @@ useEffect(() => {
 
   return (
     <>
-      <PokemonList pokemon={pokemon} />
+      <h1>Pokémon list <img src={pokeball} alt="pokeball" /> </h1>
+      <div className='card-container'>
+        {allPokemons.map((pokemon, index) => (
+          <PokemonInfoCard 
+            id={pokemon.id}
+            name={pokemon.name}
+            image={pokemon.sprites.other.dream_world.front_default}
+            types={pokemon.types}
+            key={index}
+            height={pokemon.height}
+            weight={pokemon.weight} 
+          />
+        ))}
+      </div>
       <Pagination 
         gotoNextPage={nextPageUrl ? gotoNextPage : null}
         gotoPrevPage={prevPageUrl ? gotoPrevPage : null} 
       />
+      <Footer />
     </>
   );
 }
