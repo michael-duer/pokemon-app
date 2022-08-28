@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white
+;
 }
 
 code {
@@ -29,31 +31,58 @@ h1 > img {
   margin: 2rem; 
 }
 .card {
-  background-color: royalblue;
+  background-color: #777; /*backup color*/
   height: 22rem;
   width: 14rem;
   margin: 0.5rem;
   padding: 1rem;
   border-radius: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  border: 3px solid rgba(255,255,255,0.3);
 }
 
-.card > img {
-  height: 6rem;
-  width: 50%;
-  margin: 0 auto 0;
-  display: block;
-  background-color: #FFFFFF;
-  padding: 1rem 20%;
-  border-radius: 1rem;
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 80px 0 rgba(0,0,0,0.4);
+}
+
+.img-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  width: 80%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10%;
+}
+
+.img-container > img {
+  max-width: 90%;
+  max-height: 90%;
+  margin-top: 20px;
+}
+
+.img-container > img:hover {
+  transform: scale(1.1);
 }
 
 .id {
   font-size: 1.5rem;
-  margin-top: 0rem;
+  margin: 0rem;
 }
 .name {
   text-align: center;
   font-size: 1.7rem;
   text-decoration: underline;
   margin: 1rem;
+}
+
+.pokemonType {
+  padding: 0.15rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 1rem;
+  border: 2px solid #000;
+  margin-left: 0.5rem;
+  filter: saturate(2);
+  color: #FFFFFF;
 }
