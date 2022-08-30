@@ -1,27 +1,75 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: white
-;
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Space+Grotesk&family=Lato&family=Acme&family=Francois+One&family=Patua+One&family=Press+Start+2P&family=Ubuntu+Condensed&display=swap');
+
+@font-face {
+  font-family: 'Pokemon Solid Normal';
+  src: local('Pokemon Solid Normal'), url(./fonts/PokemonSolidNormal-xyWR.ttf) format('truetype');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: 'Krona One', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(227, 227, 227)
+;
 }
 
 h1 {
   text-align: center;
   margin: 3rem;
+  font-family: 'Pokemon Solid Normal';
+  font-size: 80px;
+  letter-spacing: 8px;
+  color: #ffcb05;
+  text-shadow: -2px 11px 0 #3c5aa6,
+               4px 7px 0 #3c5aa6,
+                1px -1px 0 #3c5aa6,
+               -1px -2px 0 #3c5aa6;
+}
+/*
+nice box shadow 
+box-shadow: 0 10px 10px 0 rgba(35,35,35,0.08);
+*/
+
+p {
+  font-size: 0.9rem;
+}
+/* pokeball icon*/
+.pokeball-icon {
+  height: 4rem;
+  rotate: 15deg;
 }
 
-h1 > img {
-  height: 2rem;
-  rotate: 15deg;
+.pokeball-icon:hover {
+  animation: shake 2s ease-in infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(5deg);
+  }
+  5% {
+    transform: translate(3px,0) rotate(-5deg);
+  }
+  10% {
+    transform: translate(5px,0) rotate(5deg);
+  }
+  15% {
+    transform: translate(2px,0) rotate(-5deg);
+  }
+  20% {
+    transform: rotate(5deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.subtitle {
+  text-align: center;
 }
 
 .card-container {
@@ -39,11 +87,17 @@ h1 > img {
   border-radius: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
   border: 3px solid rgba(255,255,255,0.3);
+  transition: 400ms ease-in-out;
 }
 
 .card:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 80px 0 rgba(0,0,0,0.4);
+}
+
+.hp {
+  text-align: end;
+  margin-top: -1.5rem;
 }
 
 .img-container {
@@ -66,15 +120,22 @@ h1 > img {
 .img-container > img:hover {
   transform: scale(1.1);
 }
-
+.img-container > img:hover, .img-container > img, .card:hover{
+  transition: 300ms ease-in-out;
+}
 .id {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin: 0rem;
 }
 .name {
   text-align: center;
-  font-size: 1.7rem;
-  text-decoration: underline;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-shadow: -1px 2px 0 #000,
+                          1px 1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px -1px 0 #000;
   margin: 1rem;
 }
 
@@ -85,4 +146,16 @@ h1 > img {
   margin-left: 0.5rem;
   filter: saturate(2);
   color: #FFFFFF;
+  text-shadow: -0.5px 2px 0 #000,
+                          0.5px 0.5px 0 #000,
+                         0.5px -0.5px 0 #000,
+                        -0.5px -0.5px 0 #000;
+  font-size: 0.7rem;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -12,7 +12,7 @@ import pokeball from './images/pokeball.png'
 
 function App() {
   const [allPokemons, setAllPokemons] = useState([]);
-  const [currentPageUrl, setCurrentPageUrl] = useState(
+  const [loadPokemon, setloadPokemon] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=20"
   );
   const [nextPageUrl, setNextPageUrl] = useState()
@@ -20,11 +20,11 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   const getAllPokemons = async () => {
-    const respond = await fetch(currentPageUrl);
+    const respond = await fetch(loadPokemon);
     const data = await respond.json();
-    setCurrentPageUrl(data.next);
-    setNextPageUrl(data.next);
-    setPrevPageUrl(data.previous);
+    setloadPokemon(data.next);
+  //  setNextPageUrl(data.next);
+  //  setPrevPageUrl(data.previous);
 
     function createPokemonObject(result) {
     result.forEach(async (pokemon) => {
@@ -47,26 +47,27 @@ function App() {
   }, []);
 
   function gotoNextPage() {
-    setCurrentPageUrl(nextPageUrl.replace("limit=14", "limit=20"))
+    setloadPokemon(nextPageUrl.replace("limit=14", "limit=20"))
   }
 
   function gotoPrevPage() {
-    setCurrentPageUrl(prevPageUrl.replace("limit=14", "limit=20"))
+    setloadPokemon(prevPageUrl.replace("limit=14", "limit=20"))
   }
 
   if (loading) return "Loading..."
 
   return (
     <>
-      <h1>Pokémon list <img src={pokeball} alt="pokeball" /> </h1>
+      <h1>Pokémon list <img className='pokeball-icon' src={pokeball} alt="pokeball" /> </h1>
+      <p className='subtitle'>Click the ball for a surprise!</p>
       <div className='card-container'>
         {allPokemons.map((pokemon, index) => (
-          <PokemonInfoCard 
+          <PokemonInfoCard key={index}
             id={pokemon.id}
             name={pokemon.name}
             image={pokemon.sprites.other.dream_world.front_default}
             types={pokemon.types}
-            key={index}
+            stats={pokemon.stats}
             height={pokemon.height}
             weight={pokemon.weight} 
           />
