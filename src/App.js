@@ -32,11 +32,14 @@ function App() {
       `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
       );
       const data = await respond.json();
+      // getSpeciesData(pokemon.name) and add info to list
       setAllPokemons((currentList) => [...currentList, data]);
     });
-    }
+    } 
+
     createPokemonObject(data.results);
-    await console.log(allPokemons);
+   // console.log("heeee");
+   // await console.log(allPokemons);
   };
   useEffect(() => {
     //add loading indicator
@@ -55,11 +58,11 @@ function App() {
   }
 
   if (loading) return "Loading..."
-
+ 
   return (
     <>
       <h1>Pokémon list <img className='pokeball-icon' src={pokeball} alt="pokeball" /> </h1>
-      <p className='subtitle'>Click the ball for a surprise!</p>
+      <p className='subtitle'>Click the ball to draw a random pokemon!</p>
       <div className='card-container'>
         {allPokemons.map((pokemon, index) => (
           <PokemonInfoCard key={index}
@@ -70,6 +73,7 @@ function App() {
             stats={pokemon.stats}
             height={pokemon.height}
             weight={pokemon.weight} 
+            appearanceInGames={pokemon.game_indices}
           />
         ))}
       </div>
