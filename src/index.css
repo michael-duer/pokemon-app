@@ -13,6 +13,13 @@ body {
   background-color: rgb(227, 227, 227);
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 h1 {
   text-align: center;
   margin: 3rem;
@@ -87,6 +94,7 @@ p {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
   border: 3px solid rgba(255,255,255,0.3);
   transition: 400ms ease-in-out;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -114,7 +122,7 @@ p {
 .img-container > img:hover {
   transform: scale(1.1);
 }
-.img-container > img:hover, .img-container > img, .card:hover{
+.img-container > img:hover, .img-container > img, .card:hover {
   transition: 300ms ease-in-out;
 }
 .id {
@@ -249,11 +257,51 @@ p {
   right: 0;
 }
 
+.load-more-btn {
+  border-radius: 1rem;
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  background-color: #ed5564;
+  color: #fff;
+  border: 1px solid #ed5564;
+  margin: 0 1rem;
+}
+
+.load-more-btn:hover {
+  background-color: #be4450;
+  border-color: #be4450;
+}
+
+.scroll-top-btn {
+  margin-top: 2rem;
+  font: inherit;
+  border: none;
+  background-color: transparent;
+  padding: 1rem;
+  cursor: pointer;
+}
+.scroll-top-btn svg {
+  height: 3rem;
+  margin-bottom: -1rem;
+  margin-right: 1rem;
+  color: #000;
+}
+
+.load-more-btn:hover, .scroll-top-btn:hover {
+  transform: scale(1.05);
+}
+.load-more-btn, .load-more-btn:hover, 
+.scroll-top-btn, .scroll-top-btn:hover {
+  transition: 300ms ease-in-out;
+}
+
 .footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 3rem 0;
 }
 
 @media screen and (max-width: 600px) {

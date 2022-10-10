@@ -3,7 +3,6 @@ import React from 'react'
 export default function Footer() {
   return (
     <div className='footer'>
-        <p>This page has been created with React and Pokeapi</p>
         <p>
           You can find the source code here on
           <a href="#" title="Github Repository" target="_blank"> Github <i className="fab fa-github"></i></a>

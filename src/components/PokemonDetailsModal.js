@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import ReactDom from 'react-dom'
-import { colors } from './pokemon-type-color'
+import { colors } from './PokemonTypeColor'
 
 import balance from '../images/balance.png'
 import ruler from '../images/ruler.png'
 import earth from '../images/earth.png'
 import gameBoy from '../images/game-boy.png'
 import gender from '../images/gender.png'
-import setAllPokemons from "../App"
 
 export default function PokemonDetails(
   { 
@@ -25,6 +24,8 @@ export default function PokemonDetails(
   }) {
   
   // TODO add function to get data about pokemon species
+  /* commented out because it causes errors
+  
   const speciesData = async () => {
     const [speciesData, setSpeciesData] = useState([]);
     //get data from API
@@ -50,7 +51,7 @@ export default function PokemonDetails(
      habitat: habitat,
      genderDifference: hasVisualGenderDifference
    }); */
-  }
+  //} 
 
   //return null if modal is closed
   if (!open) return null
@@ -69,7 +70,7 @@ export default function PokemonDetails(
             <button className='close-modal-button' onClick={onClose}>X</button>
             <p className='id'>#{id}</p>
             <p className='name'>{name.toUpperCase() }</p>
-            <p className='info'>Description: <i>{speciesData}</i></p>
+            <p className='info'>Description: <i>{/*speciesData*/}</i></p>
           <div className='info-container'> 
             <div className='info-block'>
               <div className='info-title'>Weight</div>

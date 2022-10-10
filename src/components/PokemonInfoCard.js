@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { colors } from './pokemon-type-color'
+import { colors } from './PokemonTypeColor'
 import PokemonDetailsModal from './PokemonDetailsModal'
 
 export default function PokemonInfoCard(

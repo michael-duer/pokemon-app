@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import PokemonInfoCard from './components/PokemonInfoCard';
-import Pagination from './components/Pagination';
 
 import Footer from './components/Footer'
 import pokeball from './images/pokeball.png'
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 //
 // TODO ADD DOCUMENTATION AND THOUGHTS
@@ -15,26 +15,24 @@ function App() {
   const [loadPokemon, setloadPokemon] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=20"
   );
-  const [nextPageUrl, setNextPageUrl] = useState()
-  const [prevPageUrl, setPrevPageUrl] = useState()
+
   const [loading, setLoading] = useState(true)
 
   const getAllPokemons = async () => {
     const respond = await fetch(loadPokemon);
     const data = await respond.json();
+    // set state to prepare for loading the next 20 pokemons 
     setloadPokemon(data.next);
-  //  setNextPageUrl(data.next);
-  //  setPrevPageUrl(data.previous);
 
     function createPokemonObject(result) {
-    result.forEach(async (pokemon) => {
-      const respond = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-      );
-      const data = await respond.json();
-      // getSpeciesData(pokemon.name) and add info to list
-      setAllPokemons((currentList) => [...currentList, data]);
-    });
+      result.forEach(async (pokemon) => {
+        const respond = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+        );
+        const data = await respond.json();
+        // getSpeciesData(pokemon.name) and add info to list
+        setAllPokemons((currentList) => [...currentList, data]);
+      });
     } 
 
     createPokemonObject(data.results);
@@ -48,14 +46,6 @@ function App() {
     //remove after loading
     setLoading(false)
   }, []);
-
-  function gotoNextPage() {
-    setloadPokemon(nextPageUrl.replace("limit=14", "limit=20"))
-  }
-
-  function gotoPrevPage() {
-    setloadPokemon(prevPageUrl.replace("limit=14", "limit=20"))
-  }
 
   if (loading) return "Loading..."
  
@@ -77,10 +67,11 @@ function App() {
           />
         ))}
       </div>
-      <Pagination 
-        gotoNextPage={nextPageUrl ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl ? gotoPrevPage : null} 
-      />
+      <button className="load-more-btn" 
+        onClick={() => getAllPokemons()}>
+        Load more
+      </button>
+      <ScrollToTopButton />
       <Footer />
     </>
   );
